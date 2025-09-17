@@ -1,15 +1,15 @@
-# Hướng Dẫn Webinoly Đầy Đủ
+# Complete Webinoly Guide
 
-## Giới thiệu
-Webinoly là bộ công cụ quản lý LEMP stack (Linux + Nginx + MySQL/MariaDB + PHP) tự động cho Ubuntu server. Bao gồm 5 script chính: `site`, `webinoly`, `stack`, `log`, `httpauth`.
+## Introduction
+Webinoly is an automated LEMP stack (Linux + Nginx + MySQL/MariaDB + PHP) management toolkit for Ubuntu server. Includes 5 main scripts: `site`, `webinoly`, `stack`, `log`, `httpauth`.
 
-## Cài Đặt Webinoly
+## Installing Webinoly
 
 ```bash
-# Tải và cài đặt Webinoly
+# Download and install Webinoly
 wget -qO weby qrok.es/wy && sudo bash weby 3
 
-# Kiểm tra cài đặt
+# Verify installation
 sudo webinoly -verify
 ```
 
@@ -17,28 +17,28 @@ sudo webinoly -verify
 
 # 1. STACK MANAGER
 
-## Cài Đặt Stack Components
+## Installing Stack Components
 
-### Cài đặt hoàn chỉnh LEMP
+### Complete LEMP Installation
 ```bash
-# LEMP stack đầy đủ
+# Full LEMP stack
 sudo stack -lemp
 
-# LEMP với build options
-sudo stack -lemp -build=light    # Tối giản
-sudo stack -lemp -build=basic     # Cơ bản
+# LEMP with build options
+sudo stack -lemp -build=light    # Minimal
+sudo stack -lemp -build=basic     # Basic
 ```
 
-### Cài đặt từng thành phần
+### Individual Component Installation
 ```bash
 sudo stack -nginx         # Nginx web server
 sudo stack -php           # PHP-FPM
 sudo stack -mysql         # MySQL/MariaDB
-sudo stack -mysql=client  # Chỉ MySQL client
-sudo stack -html          # Alias cho nginx
+sudo stack -mysql=client  # MySQL client only
+sudo stack -html          # Alias for nginx
 ```
 
-### Công cụ bổ sung
+### Additional Tools
 ```bash
 sudo stack -letsencrypt   # SSL certificates
 sudo stack -backups       # Backup tools
@@ -48,111 +48,111 @@ sudo stack -memcached     # Memcached
 sudo stack -pma           # phpMyAdmin
 ```
 
-## Thay Đổi Phiên Bản
+## Version Changes
 
 ```bash
-# Thay đổi PHP version
+# Change PHP version
 sudo stack -php-ver=8.1
 sudo stack -php-ver=8.2
 sudo stack -php-ver=8.3
 
-# Thay đổi MySQL/MariaDB version  
+# Change MySQL/MariaDB version
 sudo stack -mysql-ver=10.11
 sudo stack -mysql-ver=8.0
 ```
 
-## Gỡ Bỏ Components
+## Removing Components
 
-### Gỡ từng thành phần
+### Remove individual components
 ```bash
-sudo stack -nginx -purge           # Hỏi xác nhận
-sudo stack -php -purge=force       # Không hỏi
+sudo stack -nginx -purge           # Ask for confirmation
+sudo stack -php -purge=force       # No confirmation
 sudo stack -mysql -purge
-sudo stack -mysql=keep-data -purge # Giữ database data
+sudo stack -mysql=keep-data -purge # Keep database data
 ```
 
-### Gỡ công cụ
+### Remove tools
 ```bash
 sudo stack -letsencrypt -purge
-sudo stack -backups -purge  
+sudo stack -backups -purge
 sudo stack -postfix -purge
 sudo stack -redis -purge
 sudo stack -memcached -purge
 sudo stack -pma -purge
 ```
 
-### Gỡ toàn bộ
+### Remove everything
 ```bash
-sudo stack -purge-server-all       # Xóa tất cả
-sudo stack -purge-server-all=force # Không hỏi xác nhận
+sudo stack -purge-server-all       # Delete all
+sudo stack -purge-server-all=force # No confirmation
 ```
 
 ---
 
 # 2. SITE MANAGER
 
-## Tạo Website
+## Creating Websites
 
 ### WordPress Sites
 ```bash
-sudo site domain.com -wp                    # WordPress cơ bản
-sudo site domain.com -wp=custom             # WordPress tùy chỉnh
+sudo site domain.com -wp                    # Basic WordPress
+sudo site domain.com -wp=custom             # Custom WordPress
 sudo site domain.com -wp=[true,true,localhost,dbname,dbuser,dbpass,wp_]
-sudo site domain.com -wp -subfolder=/blog   # WP trong subfolder
+sudo site domain.com -wp -subfolder=/blog   # WP in subfolder
 ```
 
-### Các loại site khác
+### Other Site Types
 ```bash
-sudo site domain.com -html          # HTML static
+sudo site domain.com -html          # Static HTML
 sudo site domain.com -php           # PHP site
-sudo site domain.com -mysql         # MySQL site  
-sudo site domain.com -empty         # Site trống
-sudo site domain.com -empty=blank   # Site trống hoàn toàn
+sudo site domain.com -mysql         # MySQL site
+sudo site domain.com -empty         # Empty site
+sudo site domain.com -empty=blank   # Completely empty site
 ```
 
-### Proxy và Forward
+### Proxy and Forward
 ```bash
 sudo site domain.com -proxy=http://localhost:3000    # Reverse proxy
 sudo site domain.com -parked=maindomain.com          # Parked domain
 sudo site domain.com -forward=https://newdomain.com  # Forward domain
 ```
 
-## Quản Lý Site
+## Site Management
 
 ```bash
-sudo site domain.com -on         # Kích hoạt site
-sudo site domain.com -off        # Vô hiệu hóa site
-sudo site domain.com -delete     # Xóa site
-sudo site -delete-all            # Xóa tất cả sites
-sudo site -list                  # Liệt kê sites
-sudo site domain.com -info       # Thông tin site
+sudo site domain.com -on         # Enable site
+sudo site domain.com -off        # Disable site
+sudo site domain.com -delete     # Delete site
+sudo site -delete-all            # Delete all sites
+sudo site -list                  # List sites
+sudo site domain.com -info       # Site information
 ```
 
 ## SSL Management
 
 ```bash
-sudo site domain.com -ssl=on                    # Kích hoạt SSL
-sudo site domain.com -ssl=off                   # Tắt SSL
-sudo site domain.com -ssl=force-renewal         # Làm mới SSL
-sudo site -ssl=renew                           # Làm mới tất cả
-sudo site domain.com -ssl=on -wildcard         # SSL wildcard
+sudo site domain.com -ssl=on                    # Enable SSL
+sudo site domain.com -ssl=off                   # Disable SSL
+sudo site domain.com -ssl=force-renewal         # Force SSL renewal
+sudo site -ssl=renew                           # Renew all SSL
+sudo site domain.com -ssl=on -wildcard         # Wildcard SSL
 sudo site domain.com -ssl-crt=/path -ssl-key=/path # Custom SSL
 ```
 
 ## Cache Management
 
 ```bash
-sudo site domain.com -cache=on       # Bật FastCGI cache
-sudo site domain.com -cache=off      # Tắt cache
-sudo site domain.com -cache=purge    # Xóa cache
+sudo site domain.com -cache=on       # Enable FastCGI cache
+sudo site domain.com -cache=off      # Disable cache
+sudo site domain.com -cache=purge    # Clear cache
 ```
 
-## Clone và Staging
+## Clone and Staging
 
 ```bash
 sudo site staging.com -clone-from=production.com
 sudo site staging.com -clone-from=prod.com -overwrite=on
-sudo site domain.com -multisite-convert    # Chuyển WP Multisite
+sudo site domain.com -multisite-convert    # Convert to WP Multisite
 ```
 
 ## URL Management
@@ -160,7 +160,7 @@ sudo site domain.com -multisite-convert    # Chuyển WP Multisite
 ```bash
 sudo site domain.com -force-redirect=www     # Redirect to www
 sudo site domain.com -force-redirect=root    # Redirect to non-www
-sudo site domain.com -force-redirect=off     # Tắt redirect
+sudo site domain.com -force-redirect=off     # Disable redirect
 ```
 
 ## WordPress Tools
@@ -178,18 +178,18 @@ sudo site domain.com -env=production        # Production environment
 ## System Management
 
 ```bash
-sudo webinoly -update                # Cập nhật Webinoly
-sudo webinoly -info                  # Thông tin server
-sudo webinoly -version               # Phiên bản
-sudo webinoly -verify                # Kiểm tra tính toàn vẹn
-sudo webinoly -verify=critical       # Kiểm tra nghiêm ngặt
+sudo webinoly -update                # Update Webinoly
+sudo webinoly -info                  # Server information
+sudo webinoly -version               # Version
+sudo webinoly -verify                # Verify integrity
+sudo webinoly -verify=critical       # Critical verification
 ```
 
 ## Server Configuration
 
 ```bash
-sudo webinoly -tools-site=tools.domain.com    # Thiết lập tools site
-sudo webinoly -tools-port=8080                # Thay đổi tools port
+sudo webinoly -tools-site=tools.domain.com    # Setup tools site
+sudo webinoly -tools-port=8080                # Change tools port
 sudo webinoly -default-site=domain.com        # Default site
 sudo webinoly -sftp=on                        # SFTP access
 sudo webinoly -timezone=Asia/Ho_Chi_Minh      # Set timezone
@@ -198,8 +198,8 @@ sudo webinoly -timezone=Asia/Ho_Chi_Minh      # Set timezone
 ## Database Management
 
 ```bash
-sudo webinoly -dbpass                     # Hiển thị DB passwords
-sudo webinoly -mysql-password             # Đổi MySQL root password
+sudo webinoly -dbpass                     # Show DB passwords
+sudo webinoly -mysql-password             # Change MySQL root password
 sudo webinoly -mysql-public-access=on     # MySQL remote access
 sudo webinoly -db-import                  # Import database
 ```
@@ -264,23 +264,23 @@ sudo webinoly -uninstall                 # Uninstall Webinoly
 
 # 4. LOG MANAGER
 
-## Xem Logs Real-time
+## Real-time Log Viewing
 
 ### Website Logs
 ```bash
 log domain.com                    # Access log
 log domain.com -error             # Error log
-log domain.com -lines=100         # 100 dòng cuối
-log -error                       # Tất cả error logs
-log                             # Tất cả access logs
+log domain.com -lines=100         # Last 100 lines
+log -error                       # All error logs
+log                             # All access logs
 ```
 
 ### System Service Logs
 ```bash
 log -php                         # PHP-FPM logs
-log -fpm                         # Alias cho PHP
+log -fpm                         # Alias for PHP
 log -mail                        # Mail logs
-log -email                       # Alias cho mail
+log -email                       # Alias for mail
 log -auth                        # Authentication logs
 log -ssh                         # SSH logs
 log -syslog                      # System logs
@@ -297,33 +297,33 @@ log -mysql=error                 # Same as above
 
 ### MySQL General Log
 ```bash
-log -mysql=general -enable       # Bật general log
-log -mysql=general -disable      # Tắt general log
-log -mysql=general               # Xem general log
+log -mysql=general -enable       # Enable general log
+log -mysql=general -disable      # Disable general log
+log -mysql=general               # View general log
 ```
 
 ### MySQL Slow Query Log
 ```bash
-log -mysql=slow -enable                      # Bật slow query log
-log -mysql=slow -enable -long-query-time=5   # Bật với threshold 5s
-log -mysql=slow -disable                     # Tắt slow query log
-log -mysql=slow                              # Xem slow query log
+log -mysql=slow -enable                      # Enable slow query log
+log -mysql=slow -enable -long-query-time=5   # Enable with 5s threshold
+log -mysql=slow -disable                     # Disable slow query log
+log -mysql=slow                              # View slow query log
 ```
 
 ### MySQL Binary Log
 ```bash
-log -mysql=binary -enable        # Bật binary log
-log -mysql=binary -disable       # Tắt binary log
-log -mysql=binary                # Xem binary log
+log -mysql=binary -enable        # Enable binary log
+log -mysql=binary -disable       # Disable binary log
+log -mysql=binary                # View binary log
 ```
 
 ## WordPress Debug
 
 ```bash
-log domain.com -wp=on            # Bật WP debug mode
-log domain.com -wp=off           # Tắt WP debug mode
-log domain.com -wp               # Xem WP debug log
-log domain.com -wp=on -display=off   # Debug không hiển thị
+log domain.com -wp=on            # Enable WP debug mode
+log domain.com -wp=off           # Disable WP debug mode
+log domain.com -wp               # View WP debug log
+log domain.com -wp=on -display=off   # Debug without display
 log domain.com -wp -subfolder=/blog  # WP debug subfolder
 ```
 
@@ -331,27 +331,27 @@ log domain.com -wp -subfolder=/blog  # WP debug subfolder
 
 ### Global Settings
 ```bash
-log -access-log=on               # Bật access log global
-log -access-log=off              # Tắt access log global
-log -only-error=on               # Chỉ error log
-log -only-error=off              # Bật lại access log
+log -access-log=on               # Enable access log globally
+log -access-log=off              # Disable access log globally
+log -only-error=on               # Error log only
+log -only-error=off              # Re-enable access log
 ```
 
 ### Per Site Settings
 ```bash
-log domain.com -access-log=on    # Bật access log cho site
-log domain.com -access-log=off   # Tắt access log cho site
+log domain.com -access-log=on    # Enable access log for site
+log domain.com -access-log=off   # Disable access log for site
 ```
 
 ## Log Cleanup
 
 ```bash
-log -purge=all                   # Xóa tất cả .gz logs (hỏi xác nhận)
-log -purge=nginx                 # Xóa nginx .gz logs
-log -purge=mysql                 # Xóa mysql .gz logs
-log -purge=letsencrypt           # Xóa letsencrypt .gz logs
-log -purge=redis                 # Xóa redis .gz logs
-log -purge=force                 # Xóa không hỏi xác nhận
+log -purge=all                   # Delete all .gz logs (ask confirmation)
+log -purge=nginx                 # Delete nginx .gz logs
+log -purge=mysql                 # Delete mysql .gz logs
+log -purge=letsencrypt           # Delete letsencrypt .gz logs
+log -purge=redis                 # Delete redis .gz logs
+log -purge=force                 # Delete without confirmation
 ```
 
 ---
@@ -368,7 +368,7 @@ sudo httpauth domain.com -add             # Add for specific domain
 sudo httpauth domain.com -add=[user,pass] # Add user for domain
 ```
 
-### Delete Users  
+### Delete Users
 ```bash
 sudo httpauth -delete                     # Interactive delete
 sudo httpauth -delete=username            # Delete specific user
@@ -622,4 +622,4 @@ sudo log domain.com
 
 ---
 
-Tài liệu này cung cấp hướng dẫn toàn diện về Webinoly. Để biết thêm chi tiết, tham khảo tại https://webinoly.com
+This document provides a comprehensive guide to Webinoly. For more details, visit https://webinoly.com
