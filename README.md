@@ -154,6 +154,7 @@ sudo site domain.com -php           # PHP site
 sudo site domain.com -mysql         # MySQL site
 sudo site domain.com -empty         # Empty site
 sudo site domain.com -empty=blank   # Completely empty site
+sudo chown -R www-data:www-data /var/www/
 ```
 
 ### Proxy and Forward
