@@ -46,6 +46,25 @@
 - [File Locations](#file-locations)
 - [Important Notes](#important-notes)
 
+## Example
+```
+sudo site domain.com -php
+sudo site domain.com -wp
+sudo chown -R www-data:www-data /var/www/
+sudo httpauth domain.com -path -delete-all=force
+sudo site domain.com -ssl=on
+sudo site domain.com -ssl=off
+sudo site domain.com -ssl=force-renewal
+sudo httpauth -add
+sudo httpauth -list
+sudo httpauth domain.com -list
+sudo webinoly -dbpass
+sudo site domain.com -info
+sudo site domain.com -on
+sudo site domain.com -off
+sudo site domain.com -delete
+```
+
 ## Introduction
 Webinoly is an automated LEMP stack (Linux + Nginx + MySQL/MariaDB + PHP) management toolkit for Ubuntu server. Includes 5 main scripts: `site`, `webinoly`, `stack`, `log`, `httpauth`.
 
@@ -155,6 +174,7 @@ sudo site domain.com -mysql         # MySQL site
 sudo site domain.com -empty         # Empty site
 sudo site domain.com -empty=blank   # Completely empty site
 sudo chown -R www-data:www-data /var/www/
+sudo httpauth domain.com -path -delete-all=force
 ```
 
 ### Proxy and Forward
@@ -496,24 +516,24 @@ sudo httpauth domain.com -list=protected         # Show protected paths
 ## Production Server Setup
 
 ```bash
-# 1. Cài đặt stack hoàn chỉnh
+# 1. Install complete stack
 sudo stack -lemp
 sudo stack -letsencrypt -redis -backups
 
-# 2. Cấu hình server
+# 2. Configure server
 sudo webinoly -tools-site=tools.domain.com
 sudo webinoly -email=admin@domain.com
 sudo webinoly -aws-s3-credentials
 
-# 3. Tạo WordPress site với bảo mật
+# 3. Create WordPress site with security
 sudo site mysite.com -wp
 sudo site mysite.com -ssl=on -cache=on
 sudo httpauth mysite.com -wp-admin=on
 
-# 4. Setup backup tự động
+# 4. Setup automatic backup
 sudo webinoly -backup=s3
 
-# 5. Bảo mật tools site
+# 5. Secure tools site
 sudo httpauth tools.domain.com -add=[admin,strongpass]
 sudo site tools.domain.com -ssl=on
 ```
@@ -525,7 +545,7 @@ sudo site tools.domain.com -ssl=on
 sudo stack -lemp -build=light
 sudo stack -pma
 
-# 2. Tạo staging sites
+# 2. Create staging sites
 sudo site staging.mysite.com -clone-from=mysite.com
 sudo httpauth staging.mysite.com -path=/
 sudo httpauth staging.mysite.com -add=[dev,devpass]
