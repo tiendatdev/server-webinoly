@@ -48,21 +48,22 @@
 
 ## Example
 ```
+sudo webinoly -dbpass
 sudo site domain.com -php
 sudo site domain.com -wp
 sudo chown -R www-data:www-data /var/www/
 sudo httpauth domain.com -path -delete-all=force
+sudo site -list
+sudo site domain.com -info
+sudo site domain.com -on
+sudo site domain.com -off
+sudo site domain.com -delete
 sudo site domain.com -ssl=on
 sudo site domain.com -ssl=off
 sudo site domain.com -ssl=force-renewal
 sudo httpauth -add
 sudo httpauth -list
 sudo httpauth domain.com -list
-sudo webinoly -dbpass
-sudo site domain.com -info
-sudo site domain.com -on
-sudo site domain.com -off
-sudo site domain.com -delete
 ```
 
 ## Introduction
