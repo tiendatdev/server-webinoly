@@ -53,6 +53,7 @@ sudo site domain.com -php
 sudo site domain.com -wp
 sudo chown -R www-data:www-data /var/www/
 sudo httpauth domain.com -path -delete-all=force
+sudo webinoly -clear-cache
 sudo site -list
 sudo site domain.com -info
 sudo site domain.com -on
