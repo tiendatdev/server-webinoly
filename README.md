@@ -65,6 +65,8 @@ sudo site domain.com -ssl=force-renewal
 sudo httpauth -add
 sudo httpauth -list
 sudo httpauth domain.com -list
+sudo nginx -t && sudo systemctl reload nginx
+
 ```
 
 ## Introduction
