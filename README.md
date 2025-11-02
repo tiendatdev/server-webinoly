@@ -75,6 +75,10 @@ Webinoly is an automated LEMP stack (Linux + Nginx + MySQL/MariaDB + PHP) manage
 ## Installing Webinoly
 
 ```bash
+sudo apt update && sudo apt -y upgrade
+```
+
+```bash
 # Download and install Webinoly
 wget -qO weby qrok.es/wy && sudo bash weby 3
 
