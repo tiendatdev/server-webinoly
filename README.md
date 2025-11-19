@@ -47,7 +47,9 @@
 - [Important Notes](#important-notes)
 
 ## Example
+https://webinoly.com/
 ```
+wget -qO weby qrok.es/wy && sudo bash weby
 sudo webinoly -dbpass
 sudo site domain.com -php
 sudo site domain.com -wp
