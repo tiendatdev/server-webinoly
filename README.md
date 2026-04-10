@@ -1,6 +1,6 @@
-# Complete Webinoly Guide
+## Complete Webinoly Guide
 
-## Table of Contents
+### Table of Contents
 
 - [Introduction](#introduction)
 - [Installing Webinoly](#installing-webinoly)
@@ -46,7 +46,7 @@
 - [File Locations](#file-locations)
 - [Important Notes](#important-notes)
 
-## Example
+### Example
 https://webinoly.com/
 ```
 wget -qO weby qrok.es/wy && sudo bash weby
@@ -71,40 +71,40 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ```
 
-## Introduction
+### Introduction
 Webinoly is an automated LEMP stack (Linux + Nginx + MySQL/MariaDB + PHP) management toolkit for Ubuntu server. Includes 5 main scripts: `site`, `webinoly`, `stack`, `log`, `httpauth`.
 
-## Installing Webinoly
+### Installing Webinoly
 
 ```bash
 sudo apt update && sudo apt -y upgrade
 ```
 
 ```bash
-# Download and install Webinoly
+## Download and install Webinoly
 wget -qO weby qrok.es/wy && sudo bash weby 3
 
-# Verify installation
+## Verify installation
 sudo webinoly -verify
 ```
 
 ---
 
-# 1. STACK MANAGER
+## 1. STACK MANAGER
 
-## Installing Stack Components
+### Installing Stack Components
 
-### Complete LEMP Installation
+#### Complete LEMP Installation
 ```bash
-# Full LEMP stack
+## Full LEMP stack
 sudo stack -lemp
 
-# LEMP with build options
+## LEMP with build options
 sudo stack -lemp -build=light    # Minimal
 sudo stack -lemp -build=basic     # Basic
 ```
 
-### Individual Component Installation
+#### Individual Component Installation
 ```bash
 sudo stack -nginx         # Nginx web server
 sudo stack -php           # PHP-FPM
@@ -113,7 +113,7 @@ sudo stack -mysql=client  # MySQL client only
 sudo stack -html          # Alias for nginx
 ```
 
-### Additional Tools
+#### Additional Tools
 ```bash
 sudo stack -letsencrypt   # SSL certificates
 sudo stack -backups       # Backup tools
@@ -123,22 +123,22 @@ sudo stack -memcached     # Memcached
 sudo stack -pma           # phpMyAdmin
 ```
 
-## Version Changes
+### Version Changes
 
 ```bash
-# Change PHP version
+## Change PHP version
 sudo stack -php-ver=8.1
 sudo stack -php-ver=8.2
 sudo stack -php-ver=8.3
 
-# Change MySQL/MariaDB version
+## Change MySQL/MariaDB version
 sudo stack -mysql-ver=10.11
 sudo stack -mysql-ver=8.0
 ```
 
-## Removing Components
+### Removing Components
 
-### Remove individual components
+#### Remove individual components
 ```bash
 sudo stack -nginx -purge           # Ask for confirmation
 sudo stack -php -purge=force       # No confirmation
@@ -146,7 +146,7 @@ sudo stack -mysql -purge
 sudo stack -mysql=keep-data -purge # Keep database data
 ```
 
-### Remove tools
+#### Remove tools
 ```bash
 sudo stack -letsencrypt -purge
 sudo stack -backups -purge
@@ -156,7 +156,7 @@ sudo stack -memcached -purge
 sudo stack -pma -purge
 ```
 
-### Remove everything
+#### Remove everything
 ```bash
 sudo stack -purge-server-all       # Delete all
 sudo stack -purge-server-all=force # No confirmation
@@ -164,11 +164,11 @@ sudo stack -purge-server-all=force # No confirmation
 
 ---
 
-# 2. SITE MANAGER
+## 2. SITE MANAGER
 
-## Creating Websites
+### Creating Websites
 
-### WordPress Sites
+#### WordPress Sites
 ```bash
 sudo site domain.com -wp                    # Basic WordPress
 sudo site domain.com -wp=custom             # Custom WordPress
@@ -176,7 +176,7 @@ sudo site domain.com -wp=[true,true,localhost,dbname,dbuser,dbpass,wp_]
 sudo site domain.com -wp -subfolder=/blog   # WP in subfolder
 ```
 
-### Other Site Types
+#### Other Site Types
 ```bash
 sudo site domain.com -html          # Static HTML
 sudo site domain.com -php           # PHP site
@@ -187,14 +187,14 @@ sudo chown -R www-data:www-data /var/www/
 sudo httpauth domain.com -path -delete-all=force
 ```
 
-### Proxy and Forward
+#### Proxy and Forward
 ```bash
 sudo site domain.com -proxy=http://localhost:3000    # Reverse proxy
 sudo site domain.com -parked=maindomain.com          # Parked domain
 sudo site domain.com -forward=https://newdomain.com  # Forward domain
 ```
 
-## Site Management
+### Site Management
 
 ```bash
 sudo site domain.com -on         # Enable site
@@ -205,7 +205,7 @@ sudo site -list                  # List sites
 sudo site domain.com -info       # Site information
 ```
 
-## SSL Management
+### SSL Management
 
 ```bash
 sudo site domain.com -ssl=on                    # Enable SSL
@@ -216,7 +216,7 @@ sudo site domain.com -ssl=on -wildcard         # Wildcard SSL
 sudo site domain.com -ssl-crt=/path -ssl-key=/path # Custom SSL
 ```
 
-## Cache Management
+### Cache Management
 
 ```bash
 sudo site domain.com -cache=on       # Enable FastCGI cache
@@ -224,7 +224,7 @@ sudo site domain.com -cache=off      # Disable cache
 sudo site domain.com -cache=purge    # Clear cache
 ```
 
-## Clone and Staging
+### Clone and Staging
 
 ```bash
 sudo site staging.com -clone-from=production.com
@@ -232,7 +232,7 @@ sudo site staging.com -clone-from=prod.com -overwrite=on
 sudo site domain.com -multisite-convert    # Convert to WP Multisite
 ```
 
-## URL Management
+### URL Management
 
 ```bash
 sudo site domain.com -force-redirect=www     # Redirect to www
@@ -240,7 +240,7 @@ sudo site domain.com -force-redirect=root    # Redirect to non-www
 sudo site domain.com -force-redirect=off     # Disable redirect
 ```
 
-## WordPress Tools
+### WordPress Tools
 
 ```bash
 sudo site domain.com -replace-content -from=old.com -to=new.com
@@ -250,9 +250,9 @@ sudo site domain.com -env=production        # Production environment
 
 ---
 
-# 3. WEBINOLY MANAGER
+## 3. WEBINOLY MANAGER
 
-## System Management
+### System Management
 
 ```bash
 sudo webinoly -update                # Update Webinoly
@@ -262,7 +262,7 @@ sudo webinoly -verify                # Verify integrity
 sudo webinoly -verify=critical       # Critical verification
 ```
 
-## Server Configuration
+### Server Configuration
 
 ```bash
 sudo webinoly -tools-site=tools.domain.com    # Setup tools site
@@ -272,7 +272,7 @@ sudo webinoly -sftp=on                        # SFTP access
 sudo webinoly -timezone=Asia/Ho_Chi_Minh      # Set timezone
 ```
 
-## Database Management
+### Database Management
 
 ```bash
 sudo webinoly -dbpass                     # Show DB passwords
@@ -281,7 +281,7 @@ sudo webinoly -mysql-public-access=on     # MySQL remote access
 sudo webinoly -db-import                  # Import database
 ```
 
-## Cache Management
+### Cache Management
 
 ```bash
 sudo webinoly -clear-cache                # Xóa tất cả cache
@@ -293,7 +293,7 @@ sudo webinoly -clear-cache=domain.com     # Xóa cache của site
 sudo webinoly -cache-valid=1h             # Cache validity time
 ```
 
-## Backup & AWS S3
+### Backup & AWS S3
 
 ```bash
 sudo webinoly -backup                     # Backup wizard
@@ -305,7 +305,7 @@ sudo webinoly -backup -list               # List S3 backups
 sudo webinoly -aws-s3-credentials         # Setup S3 credentials
 ```
 
-## Email & SMTP
+### Email & SMTP
 
 ```bash
 sudo webinoly -smtp                       # Setup SMTP
@@ -313,14 +313,14 @@ sudo webinoly -smtp -purge                # Remove SMTP
 sudo webinoly -email=admin@domain.com     # Set admin email
 ```
 
-## Security
+### Security
 
 ```bash
 sudo webinoly -blockip=1.2.3.4           # Block IP
 sudo webinoly -blockip=off               # Unblock all IPs
 ```
 
-## Custom Cache Rules
+### Custom Cache Rules
 
 ```bash
 sudo webinoly -skip-cache="/admin,/api"
@@ -329,7 +329,7 @@ sudo webinoly -query-string-cache="page,sort"
 sudo webinoly -query-string-never-cache="debug"
 ```
 
-## Advanced Options
+### Advanced Options
 
 ```bash
 sudo webinoly -custom-headers             # Custom HTTP headers
@@ -339,11 +339,11 @@ sudo webinoly -uninstall                 # Uninstall Webinoly
 
 ---
 
-# 4. LOG MANAGER
+## 4. LOG MANAGER
 
-## Real-time Log Viewing
+### Real-time Log Viewing
 
-### Website Logs
+#### Website Logs
 ```bash
 log domain.com                    # Access log
 log domain.com -error             # Error log
@@ -352,7 +352,7 @@ log -error                       # All error logs
 log                             # All access logs
 ```
 
-### System Service Logs
+#### System Service Logs
 ```bash
 log -php                         # PHP-FPM logs
 log -fpm                         # Alias for PHP
@@ -364,22 +364,22 @@ log -syslog                      # System logs
 log -le                         # Let's Encrypt logs
 ```
 
-## MySQL Logs
+### MySQL Logs
 
-### MySQL Error Log
+#### MySQL Error Log
 ```bash
 log -mysql                       # MySQL error log
 log -mysql=error                 # Same as above
 ```
 
-### MySQL General Log
+#### MySQL General Log
 ```bash
 log -mysql=general -enable       # Enable general log
 log -mysql=general -disable      # Disable general log
 log -mysql=general               # View general log
 ```
 
-### MySQL Slow Query Log
+#### MySQL Slow Query Log
 ```bash
 log -mysql=slow -enable                      # Enable slow query log
 log -mysql=slow -enable -long-query-time=5   # Enable with 5s threshold
@@ -387,14 +387,14 @@ log -mysql=slow -disable                     # Disable slow query log
 log -mysql=slow                              # View slow query log
 ```
 
-### MySQL Binary Log
+#### MySQL Binary Log
 ```bash
 log -mysql=binary -enable        # Enable binary log
 log -mysql=binary -disable       # Disable binary log
 log -mysql=binary                # View binary log
 ```
 
-## WordPress Debug
+### WordPress Debug
 
 ```bash
 log domain.com -wp=on            # Enable WP debug mode
@@ -404,9 +404,9 @@ log domain.com -wp=on -display=off   # Debug without display
 log domain.com -wp -subfolder=/blog  # WP debug subfolder
 ```
 
-## Access Log Management
+### Access Log Management
 
-### Global Settings
+#### Global Settings
 ```bash
 log -access-log=on               # Enable access log globally
 log -access-log=off              # Disable access log globally
@@ -414,13 +414,13 @@ log -only-error=on               # Error log only
 log -only-error=off              # Re-enable access log
 ```
 
-### Per Site Settings
+#### Per Site Settings
 ```bash
 log domain.com -access-log=on    # Enable access log for site
 log domain.com -access-log=off   # Disable access log for site
 ```
 
-## Log Cleanup
+### Log Cleanup
 
 ```bash
 log -purge=all                   # Delete all .gz logs (ask confirmation)
@@ -433,11 +433,11 @@ log -purge=force                 # Delete without confirmation
 
 ---
 
-# 5. HTTP AUTHENTICATION MANAGER
+## 5. HTTP AUTHENTICATION MANAGER
 
-## User Management
+### User Management
 
-### Add Users
+#### Add Users
 ```bash
 sudo httpauth -add                        # Interactive add
 sudo httpauth -add=[username,password]    # Direct add
@@ -445,44 +445,44 @@ sudo httpauth domain.com -add             # Add for specific domain
 sudo httpauth domain.com -add=[user,pass] # Add user for domain
 ```
 
-### Delete Users
+#### Delete Users
 ```bash
 sudo httpauth -delete                     # Interactive delete
 sudo httpauth -delete=username            # Delete specific user
 sudo httpauth domain.com -delete=username # Delete from domain
 ```
 
-### List Users
+#### List Users
 ```bash
 sudo httpauth -list                       # List global users
 sudo httpauth domain.com -list            # List domain users
 ```
 
-## WordPress Admin Protection
+### WordPress Admin Protection
 
-### Per Site
+#### Per Site
 ```bash
 sudo httpauth domain.com -wp-admin=on     # Protect WP admin
 sudo httpauth domain.com -wp-admin=off    # Remove protection
 sudo httpauth domain.com -wp-admin=on -subfolder=/blog  # Subfolder protection
 ```
 
-### Global Setting (for new sites)
+#### Global Setting (for new sites)
 ```bash
 sudo httpauth -wp-admin=on                # Enable for new sites
 sudo httpauth -wp-admin=off               # Disable for new sites
 ```
 
-## IP Whitelist Management
+### IP Whitelist Management
 
-### Add to Whitelist
+#### Add to Whitelist
 ```bash
 sudo httpauth -whitelist                  # Interactive add
 sudo httpauth -whitelist=1.2.3.4         # Add specific IP
 sudo httpauth -whitelist=1.2.3.4,5.6.7.8 # Add multiple IPs
 ```
 
-### Remove from Whitelist
+#### Remove from Whitelist
 ```bash
 sudo httpauth -whitelist=1.2.3.4 -delete # Remove specific IP
 sudo httpauth -whitelist=1.2.3.4,5.6.7.8 -delete # Remove multiple
@@ -490,14 +490,14 @@ sudo httpauth -whitelist -delete-all      # Remove all (confirm)
 sudo httpauth -whitelist -delete-all=force # Remove all (no confirm)
 ```
 
-### List Whitelist
+#### List Whitelist
 ```bash
 sudo httpauth -whitelist -list            # Show all whitelisted IPs
 ```
 
-## Path Protection
+### Path Protection
 
-### Protect Paths
+#### Protect Paths
 ```bash
 sudo httpauth domain.com -path            # Interactive path protection
 sudo httpauth domain.com -path=/admin     # Protect specific path
@@ -506,7 +506,7 @@ sudo httpauth domain.com -path=/          # Protect entire site
 sudo httpauth domain.com -path=/blog -subfolder=/blog # Subfolder path
 ```
 
-### Remove Path Protection
+#### Remove Path Protection
 ```bash
 sudo httpauth domain.com -path=/admin -delete    # Remove specific path
 sudo httpauth domain.com -path=all -delete       # Remove all paths
@@ -514,179 +514,179 @@ sudo httpauth domain.com -path -delete-all       # Remove all (confirm)
 sudo httpauth domain.com -path -delete-all=force # Remove all (no confirm)
 ```
 
-### List Protected Paths
+#### List Protected Paths
 ```bash
 sudo httpauth domain.com -list=protected         # Show protected paths
 ```
 
 ---
 
-# WORKFLOW EXAMPLES
+## WORKFLOW EXAMPLES
 
-## Production Server Setup
+### Production Server Setup
 
 ```bash
-# 1. Install complete stack
+## 1. Install complete stack
 sudo stack -lemp
 sudo stack -letsencrypt -redis -backups
 
-# 2. Configure server
+## 2. Configure server
 sudo webinoly -tools-site=tools.domain.com
 sudo webinoly -email=admin@domain.com
 sudo webinoly -aws-s3-credentials
 
-# 3. Create WordPress site with security
+## 3. Create WordPress site with security
 sudo site mysite.com -wp
 sudo site mysite.com -ssl=on -cache=on
 sudo httpauth mysite.com -wp-admin=on
 
-# 4. Setup automatic backup
+## 4. Setup automatic backup
 sudo webinoly -backup=s3
 
-# 5. Secure tools site
+## 5. Secure tools site
 sudo httpauth tools.domain.com -add=[admin,strongpass]
 sudo site tools.domain.com -ssl=on
 ```
 
-## Development Environment
+### Development Environment
 
 ```bash
-# 1. Setup lightweight
+## 1. Setup lightweight
 sudo stack -lemp -build=light
 sudo stack -pma
 
-# 2. Create staging sites
+## 2. Create staging sites
 sudo site staging.mysite.com -clone-from=mysite.com
 sudo httpauth staging.mysite.com -path=/
 sudo httpauth staging.mysite.com -add=[dev,devpass]
 
-# 3. Debug setup
+## 3. Debug setup
 sudo log staging.mysite.com -wp=on
 sudo log -mysql=slow -enable -long-query-time=1
 ```
 
-## Maintenance Tasks
+### Maintenance Tasks
 
 ```bash
-# 1. System updates
+## 1. System updates
 sudo webinoly -update
 sudo webinoly -verify
 
-# 2. Backup everything
+## 2. Backup everything
 sudo webinoly -backup=local -export
 
-# 3. Log cleanup
+## 3. Log cleanup
 sudo log -purge=nginx
 sudo log -purge=mysql
 
-# 4. Cache cleanup
+## 4. Cache cleanup
 sudo webinoly -clear-cache=all
 
-# 5. SSL renewals
+## 5. SSL renewals
 sudo site -ssl=renew
 ```
 
-## Security Hardening
+### Security Hardening
 
 ```bash
-# 1. Enable WP admin protection globally
+## 1. Enable WP admin protection globally
 sudo httpauth -wp-admin=on
 
-# 2. Whitelist office IPs
+## 2. Whitelist office IPs
 sudo httpauth -whitelist=203.0.113.5,198.51.100.10
 
-# 3. Protect sensitive paths
+## 3. Protect sensitive paths
 sudo httpauth api.domain.com -path=/admin
 sudo httpauth api.domain.com -path=/config -exact
 
-# 4. Block malicious IPs
+## 4. Block malicious IPs
 sudo webinoly -blockip=1.2.3.4
 
-# 5. Disable access logs for performance
+## 5. Disable access logs for performance
 sudo log -access-log=off
 sudo log important-site.com -access-log=on
 ```
 
-## Troubleshooting Common Issues
+### Troubleshooting Common Issues
 
-### Site returns 403 Forbidden
+#### Site returns 403 Forbidden
 ```bash
-# Check HTTP auth
+## Check HTTP auth
 sudo httpauth domain.com -list
 sudo httpauth -whitelist -list
 
-# Check permissions
+## Check permissions
 sudo chown -R www-data:www-data /var/www/domain.com/
 sudo find /var/www/domain.com/ -type d -exec chmod 755 {} \;
 sudo find /var/www/domain.com/ -type f -exec chmod 644 {} \;
 
-# Check logs
+## Check logs
 sudo log domain.com -error
 ```
 
-### Database connection issues
+#### Database connection issues
 ```bash
-# Check DB credentials
+## Check DB credentials
 sudo webinoly -dbpass
 sudo site domain.com -info
 
-# Test DB connection
+## Test DB connection
 mysql -u admin -p
 
-# Check MySQL service
+## Check MySQL service
 sudo systemctl status mysql
 sudo log -mysql=error
 ```
 
-### SSL certificate issues
+#### SSL certificate issues
 ```bash
-# Check SSL status
+## Check SSL status
 sudo site domain.com -info
 
-# Renew certificates
+## Renew certificates
 sudo site domain.com -ssl=force-renewal
 sudo site -ssl=renew
 
-# Check Let's Encrypt logs
+## Check Let's Encrypt logs
 sudo log -le
 ```
 
-### Performance issues
+#### Performance issues
 ```bash
-# Clear all caches
+## Clear all caches
 sudo webinoly -clear-cache=all
 sudo site domain.com -cache=purge
 
-# Check slow queries
+## Check slow queries
 sudo log -mysql=slow -enable
 sudo log -mysql=slow
 
-# Monitor access logs
+## Monitor access logs
 sudo log domain.com
 ```
 
-## File Locations
+### File Locations
 
 ```bash
-# Nginx configs
+## Nginx configs
 /etc/nginx/sites-available/
 /etc/nginx/sites-enabled/
 
-# Website files
+## Website files
 /var/www/domain.com/htdocs/
 
-# Webinoly config
+## Webinoly config
 /opt/webinoly/webinoly.conf
 
-# Logs
+## Logs
 /var/log/nginx/
 /var/log/mysql/
 
-# SSL certificates
+## SSL certificates
 /etc/letsencrypt/live/domain.com/
 ```
 
-## Important Notes
+### Important Notes
 
 - Always backup before major changes
 - Test nginx config with `sudo nginx -t`
