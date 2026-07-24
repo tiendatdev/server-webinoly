@@ -69,6 +69,8 @@ sudo httpauth -list
 sudo httpauth domain.com -list
 sudo nginx -t && sudo systemctl reload nginx
 
+sudo chown -R www-data:www-data /var/www/ && sudo httpauth domain.com -path -delete-all=force && sudo nginx -t && sudo systemctl reload nginx
+
 ```
 
 ### Introduction
