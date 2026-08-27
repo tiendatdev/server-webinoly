@@ -73,6 +73,12 @@ sudo chown -R www-data:www-data /var/www/ && sudo httpauth domain.com -path -del
 
 ```
 
+```
+
+sudo chown -R www-data:www-data /var/www/ && sudo httpauth domain.com -path -delete-all=force && sudo nginx -t && sudo systemctl reload nginx
+
+```
+
 ### Introduction
 Webinoly is an automated LEMP stack (Linux + Nginx + MySQL/MariaDB + PHP) management toolkit for Ubuntu server. Includes 5 main scripts: `site`, `webinoly`, `stack`, `log`, `httpauth`.
 
